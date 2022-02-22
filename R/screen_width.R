@@ -1,4 +1,0 @@
-
-
-terminal_width <- function() {
-}

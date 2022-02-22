@@ -16,6 +16,8 @@ Depends:
     R (>= 3.6.0)
 Imports:
     Rcpp,
+    utils,
+    graphics,
     base64enc
 Suggests:
     simplermarkdown
@@ -25,4 +27,4 @@ SystemRequirements: C++11
 License: GPL-3
 LazyLoad: yes
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
