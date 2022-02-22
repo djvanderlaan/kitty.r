@@ -1,0 +1,28 @@
+Package: kitty.r
+Type: Package
+Title: R in the Kitty Terminal 
+Version: 0.0.1
+Authors@R: 
+    person(given = "Jan",
+           family = "van der Laan",
+           role = c("aut", "cre"),
+           email = "r@eoos.dds.nl",
+           comment = c(ORCID = "0000-0002-0693-1514"))
+Description: Functions for working with the Kitty terminal in R. Most
+    notably, functions for allowing graphical output in the terminal.
+BugReports: https://github.com/djvanderlaan/kitty.r/issues
+URL: https://github.com/djvanderlaan/kitty.r
+Depends:
+    R (>= 3.6.0)
+Imports:
+    Rcpp,
+    base64enc
+Suggests:
+    simplermarkdown
+LinkingTo: Rcpp
+VignetteBuilder: simplermarkdown
+SystemRequirements: C++11
+License: GPL-3
+LazyLoad: yes
+Encoding: UTF-8
+RoxygenNote: 7.1.1
