@@ -27,4 +27,4 @@ SystemRequirements: C++11
 License: GPL-3
 LazyLoad: yes
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2
