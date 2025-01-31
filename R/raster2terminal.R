@@ -26,7 +26,7 @@ raster2terminal <- function(raster, compress = TRUE) {
   for (i in seq_along(payloads)) {
     start <- "\033_G"
     end <- "\033\\"
-    control <- sprintf(controlstring, nrow(raster), ncol(raster), 
+    control <- sprintf(controlstring, ncol(raster), nrow(raster), 
       1*(i != length(payloads)))
     out <- paste0(start, control, ";", payloads[i], end)
     cat(out)

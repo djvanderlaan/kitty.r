@@ -33,14 +33,19 @@ plot_png_end <- function(out, success) {
 }
 
 plot_kitty_start <- function(name, ...) {
-  cap <- agg_capture()
+  print(list(...))
+  cap <- agg_capture(...)
   cap
 }
 
 plot_kitty_end <- function(out, success) {
   raster <- out()
   dev.off()
-  if (success) raster2terminal(raster)
+  if (success) {
+    cat("\n")
+    raster2terminal(raster)
+    cat("\n")
+  }
 }
 
 plot_eval <- function(name, expr, output = getOption("plot_output", "interactive"), 
@@ -49,7 +54,7 @@ plot_eval <- function(name, expr, output = getOption("plot_output", "interactive
   fnstart <- get(fnname)
   fnname <- paste0("plot_", output, "_end")
   fnend <- get(fnname)
-  out <- fnstart(name, ...)
+  out <- fnstart(name, width = width, height = height, ...)
   success = FALSE
   on.exit(fnend(out, success))
   expr
@@ -58,7 +63,7 @@ plot_eval <- function(name, expr, output = getOption("plot_output", "interactive
 
 plot_eval("work/foo", {
       plot(rnorm(100), pch = 20)
-    }, "kitty")
+    }, "kitty", width = 8, height = 6, units = "in", res = 100, scaling = 1)
 
 png2terminal("work/foo.png")
 
@@ -88,7 +93,7 @@ raster2terminal <- function(raster, compress = TRUE) {
   for (i in seq_along(payloads)) {
     start <- "\033_G"
     end <- "\033\\"
-    control <- sprintf(controlstring, nrow(raster), ncol(raster), 
+    control <- sprintf(controlstring, ncol(raster), nrow(raster), 
       1*(i != length(payloads)))
     out <- paste0(start, control, ";", payloads[i], end)
     cat(out)
