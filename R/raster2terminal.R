@@ -1,6 +1,8 @@
 #' Dump an image raster to the terminal using the Terminal Graphics Protocol
 #'
-#' @param raster the image 'raster' e.g. the output of \code{\link{as.raster}}
+#' @param raster the image 'raster' e.g. the output of \code{\link{as.raster}}.
+#'
+#' @param compress compress the data before sending to the terminal. 
 #'
 #' @details
 #' The Terminal Graphics Protocol is not supported by many Terminal Emulators.
@@ -14,7 +16,7 @@
 #' @export
 raster2terminal <- function(raster, compress = TRUE) {
   # Convert the raster to raw byte vector
-  data <- t(raster) |> col2rgb() |> as.vector() |> as.raw() 
+  data <- t(raster) |> grDevices::col2rgb() |> as.vector() |> as.raw() 
   controlstring <- "a=T,f=24,s=%d,v=%d,m=%d"
   if (compress) {
     data <- memCompress(data)

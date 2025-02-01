@@ -10,19 +10,19 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// screen_width_cpp
-int screen_width_cpp();
-RcppExport SEXP _kitty_r_screen_width_cpp() {
+// screen_dim_cpp
+Rcpp::IntegerVector screen_dim_cpp();
+RcppExport SEXP _kitty_r_screen_dim_cpp() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(screen_width_cpp());
+    rcpp_result_gen = Rcpp::wrap(screen_dim_cpp());
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_kitty_r_screen_width_cpp", (DL_FUNC) &_kitty_r_screen_width_cpp, 0},
+    {"_kitty_r_screen_dim_cpp", (DL_FUNC) &_kitty_r_screen_dim_cpp, 0},
     {NULL, NULL, 0}
 };
 

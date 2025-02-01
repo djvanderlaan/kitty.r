@@ -7,7 +7,9 @@
 raster2terminal(raster, compress = TRUE)
 }
 \arguments{
-\item{raster}{the image 'raster' e.g. the output of \code{\link{as.raster}}}
+\item{raster}{the image 'raster' e.g. the output of \code{\link{as.raster}}.}
+
+\item{compress}{compress the data before sending to the terminal.}
 }
 \value{
 Called for it's side effect of writing the image to the terminal (standard

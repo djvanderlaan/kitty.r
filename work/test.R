@@ -16,28 +16,23 @@ cat("\n")
 
 plot_interactive_start <- function(name, ...) {
 }
-
 plot_interactive_end <- function(out, success) {
 }
-
 plot_png_start <- function(name, ...) {
   fn <- paste0(name, ".png")
   # TODO: better create png in temp file and move to fn when success
   png(fn, ...)
   fn
 }
-
 plot_png_end <- function(out, success) {
   dev.off()
   file.remove(out)
 }
-
 plot_kitty_start <- function(name, ...) {
   print(list(...))
   cap <- agg_capture(...)
   cap
 }
-
 plot_kitty_end <- function(out, success) {
   raster <- out()
   dev.off()
@@ -62,12 +57,30 @@ plot_eval <- function(name, expr, output = getOption("plot_output", "interactive
 }
 
 plot_eval("work/foo", {
-      plot(rnorm(100), pch = 20)
+      plot(rnorm(1000), pch = 20)
+      abline(h = 0, col = "red", lty = 3, lwd = 2)
+      grid()
     }, "kitty", width = 8, height = 6, units = "in", res = 100, scaling = 1)
 
 png2terminal("work/foo.png")
 
 plot
+
+
+screendim <- screen_dim_cpp()
+lineheight <- screendim[2]/screendim[4];
+lineheight
+height <- 6
+res <- 100
+# Picture is height * res high
+fontsize <- lineheight*72/res
+
+plot_eval("work/foo", {
+      plot(rnorm(1000), pch = 20)
+      abline(h = 0, col = "red", lty = 3, lwd = 2)
+      grid()
+    }, "kitty", width = 8, height = 6, units = "in", pointsize = fontsize, res = 100, scaling = 1)
+
 
 
 

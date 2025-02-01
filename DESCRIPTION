@@ -18,6 +18,7 @@ Imports:
     Rcpp,
     utils,
     graphics,
+    grDevices,
     base64enc
 Suggests:
     simplermarkdown

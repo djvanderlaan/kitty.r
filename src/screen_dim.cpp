@@ -4,9 +4,9 @@
 #include <sys/ioctl.h>
 
 // [[Rcpp::export]]
-int screen_width_cpp() {
+Rcpp::IntegerVector screen_dim_cpp() {
   struct winsize sz;
   ioctl(0, TIOCGWINSZ, &sz);
-  return sz.ws_xpixel;
+  return {sz.ws_xpixel, sz.ws_ypixel, sz.ws_row, sz.ws_col};
 }
 

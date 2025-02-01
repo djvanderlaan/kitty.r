@@ -1,4 +1,3 @@
-
 #' Get the with of the terminal window in pixels
 #'
 #' @return
@@ -6,6 +5,6 @@
 #'
 #' @export
 kitty_width <- function() {
-  screen_width_cpp();
+  kitty_dim()[1] |> as.vector()
 }
 
