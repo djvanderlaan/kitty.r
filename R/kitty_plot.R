@@ -20,9 +20,18 @@
 #' \code{\link{kitty_foreground}}.
 #'
 #' @export
-kitty_plot <- function(expr, width = kitty_width(), height = 0.8*kitty_width(), 
+kitty_plot <- function(expr, 
+    width = min(1200, kitty_width(), kitty_height()/0.8),
+    height = 0.8*kitty_width(), 
     units = "px", res = NA, ..., 
     kitty_col = TRUE, kitty_bg = kitty_col, kitty_fg = kitty_col) {
+  if (is.na(res)) {
+    dim <- kitty_dim()
+    # number of pixels per row/line = font height
+    r <- dim["y_pixels"]/dim["columns"]
+    # Default font is 12 points = 12/72 inch so to get the right font size:
+    res <- r*72/12
+  }
   fn <- tempfile()
   grDevices::png(fn, width = width, height = height, res = res, units = units, ...)
   if (kitty_bg || kitty_fg) {
