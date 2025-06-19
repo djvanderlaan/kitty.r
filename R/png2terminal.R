@@ -13,6 +13,7 @@
 #' @importFrom base64enc base64encode
 #' @export
 png2terminal <- function(filename) {
+  is_kitty(throw = TRUE)
   d <- base64enc::base64encode(filename, 4096)
   for (i in seq_along(d)) {
     out <- "\033_Ga=T,f=100,m=1;" 

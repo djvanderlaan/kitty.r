@@ -21,7 +21,6 @@ Imports:
     grDevices,
     base64enc
 LinkingTo: Rcpp
-SystemRequirements: C++11
 License: GPL-3
 LazyLoad: yes
 Encoding: UTF-8

@@ -11,6 +11,7 @@
 #' @rdname kitty_colors
 #' @export
 kitty_colors <- function() {
+  is_kitty(throw = TRUE)
   colors <- getOption("kitty_colors")
   if (is.null(colors)) {
     colors <- system("kitty @get-colors", intern = TRUE)
@@ -26,6 +27,7 @@ kitty_colors <- function() {
 #' @export
 #' @rdname kitty_colors
 kitty_background <- function() {
+  is_kitty(throw = TRUE)
   colors <- kitty_colors()
   colors$value[colors$name == "background"]
 }
@@ -33,6 +35,7 @@ kitty_background <- function() {
 #' @export
 #' @rdname kitty_colors
 kitty_foreground <- function() {
+  is_kitty(throw = TRUE)
   colors <- kitty_colors()
   colors$value[colors$name == "foreground"]
 }
@@ -40,6 +43,7 @@ kitty_foreground <- function() {
 #' @export
 #' @rdname kitty_colors
 kitty_palette <- function() {
+  is_kitty(throw = TRUE)
   colors <- kitty_colors()
   colors$value[colors$name %in% paste0("color", 1:9)]
 }

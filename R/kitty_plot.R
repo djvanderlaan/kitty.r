@@ -19,12 +19,26 @@
 #' \code{col.lab}, \code{col.main} and \code{col.sub} using \code{\link{par}} to
 #' \code{\link{kitty_foreground}}.
 #'
+#' @examples
+#' if (is_kitty()) {
+#'   kitty_plot({
+#'     data(iris)
+#'     plot(iris$Sepal.Width, iris$Sepal.Length, 
+#'       col = kitty_palette()[iris$Species], 
+#'       pch = 20)
+#'     grid(lty = 2)
+#'     legend("topright", legend = levels(iris$Species), 
+#'       col = kitty_palette()[1:3], pch = 20)
+#'   })
+#' }
+#'
 #' @export
 kitty_plot <- function(expr, 
     width = min(1200, kitty_width(), kitty_height()/0.8),
     height = 0.8*kitty_width(), 
     units = "px", res = NA, ..., 
     kitty_col = TRUE, kitty_bg = kitty_col, kitty_fg = kitty_col) {
+  is_kitty(throw = TRUE)
   if (is.na(res)) {
     dim <- kitty_dim()
     # number of pixels per row/line = font height

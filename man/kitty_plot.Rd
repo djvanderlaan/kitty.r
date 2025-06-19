@@ -47,3 +47,17 @@ The \code{kitty_fg} argument sets \code{fg}, \code{col}, \code{col.axis},
 \code{col.lab}, \code{col.main} and \code{col.sub} using \code{\link{par}} to
 \code{\link{kitty_foreground}}.
 }
+\examples{
+if (is_kitty()) {
+  kitty_plot({
+    data(iris)
+    plot(iris$Sepal.Width, iris$Sepal.Length, 
+      col = kitty_palette()[iris$Species], 
+      pch = 20)
+    grid(lty = 2)
+    legend("topright", legend = levels(iris$Species), 
+      col = kitty_palette()[1:3], pch = 20)
+  })
+}
+
+}

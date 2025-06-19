@@ -15,6 +15,7 @@
 #' @importFrom base64enc base64encode
 #' @export
 raster2terminal <- function(raster, compress = TRUE) {
+  is_kitty(throw = TRUE)
   # Convert the raster to raw byte vector
   data <- t(raster) |> grDevices::col2rgb() |> as.vector() |> as.raw() 
   controlstring <- "a=T,f=24,s=%d,v=%d,m=%d"

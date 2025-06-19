@@ -7,6 +7,7 @@
 #'
 #' @export
 kitty_dim <- function() {
+  is_kitty(throw = TRUE)
   dim <- screen_dim_cpp()
   names(dim) <- c("x_pixels", "y_pixels", "columns", "rows")
   dim
