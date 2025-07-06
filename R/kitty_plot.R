@@ -34,11 +34,26 @@
 #'
 #' @export
 kitty_plot <- function(expr, 
-    width = min(1200, kitty_width(), kitty_height()/0.8),
-    height = 0.8*kitty_width(), 
+    width = max(480, min(1200, kitty_width(), kitty_height()/0.8)),
+    height = 0.8*width, 
     units = "px", res = NA, ..., 
     kitty_col = TRUE, kitty_bg = kitty_col, kitty_fg = kitty_col) {
-  is_kitty(throw = TRUE)
+
+  print(width)
+  state <- kitty_begin_plot(width = width, height = height, units = units, 
+    res = res, ..., kitty_col = kitty_col, kitty_bg = kitty_bg, 
+    kitty_fg = kitty_fg)
+  on.exit(kitty_end_plot(state))
+  expr
+}
+
+
+kitty_begin_plot <- function(
+    width = min(1200, kitty_width(), kitty_height()/0.8),
+    height = 0.8*width, 
+    units = "px", res = NA, ..., 
+    kitty_col = TRUE, kitty_bg = kitty_col, kitty_fg = kitty_col) {
+  kitty.r::is_kitty(throw = TRUE)
   if (is.na(res)) {
     dim <- kitty_dim()
     # number of pixels per row/line = font height
@@ -47,10 +62,11 @@ kitty_plot <- function(expr,
     res <- r*72/12
   }
   fn <- tempfile()
+  print(width)
   grDevices::png(fn, width = width, height = height, res = res, units = units, ...)
+  opar <- graphics::par()
+  opalette <- grDevices::palette()
   if (kitty_bg || kitty_fg) {
-    opar <- graphics::par()
-    on.exit(graphics::par(opar))
     if (kitty_bg) { 
       background <- kitty_background()
       graphics::par(bg = background)
@@ -62,11 +78,16 @@ kitty_plot <- function(expr,
         col.main = foreground, col.sub = foreground)
     }
   }
-  expr
-  grDevices::dev.off()
-  on.exit(file.remove(fn))
+  list(dev = grDevices::dev.cur(), fn = fn, opar = opar, opalette = opalette)
+}
+
+kitty_end_plot <- function(state) {
+  on.exit(graphics::par(state$opar))
+  on.exit(grDevices::palette(state$opalette))
+  grDevices::dev.off(state$dev)
+  on.exit(file.remove(state$fn))
   cat("\n")
-  png2terminal(fn)
+  kitty.r::png2terminal(state$fn)
   cat("\n")
 }
 

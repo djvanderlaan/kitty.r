@@ -6,8 +6,8 @@
 \usage{
 kitty_plot(
   expr,
-  width = min(1200, kitty_width(), kitty_height()/0.8),
-  height = 0.8 * kitty_width(),
+  width = max(480, min(1200, kitty_width(), kitty_height()/0.8)),
+  height = 0.8 * width,
   units = "px",
   res = NA,
   ...,
