@@ -39,7 +39,6 @@ kitty_plot <- function(expr,
     units = "px", res = NA, ..., 
     kitty_col = TRUE, kitty_bg = kitty_col, kitty_fg = kitty_col) {
 
-  print(width)
   state <- kitty_begin_plot(width = width, height = height, units = units, 
     res = res, ..., kitty_col = kitty_col, kitty_bg = kitty_bg, 
     kitty_fg = kitty_fg)
@@ -62,7 +61,6 @@ kitty_begin_plot <- function(
     res <- r*72/12
   }
   fn <- tempfile()
-  print(width)
   grDevices::png(fn, width = width, height = height, res = res, units = units, ...)
   opar <- graphics::par()
   opalette <- grDevices::palette()
