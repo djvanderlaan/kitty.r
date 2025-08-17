@@ -1,3 +1,5 @@
+**MOVED TO <https://codeberg.org/djvanderlaan/terminalgraphics>**
+
 # kitty.r
 
 [Kitty](https://sw.kovidgoyal.net/kitty/) is a terminal emulator. One of the
